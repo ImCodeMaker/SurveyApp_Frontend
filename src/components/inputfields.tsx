@@ -1,13 +1,22 @@
 import React from "react";
 import InputsProps from "@/types/inputfieldsprops";
 
-const InputFields: React.FC<InputsProps> = ({ name, placeholder, type, value, onChange, labelText }) => {
+const InputFields: React.FC<InputsProps> = ({
+  name,
+  placeholder,
+  type,
+  value,
+  onChange,
+  labelText,
+}) => {
+
+ 
   return (
     <>
       <div className="flex flex-col">
-        <label id={name}
+        <label
           htmlFor={name}
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-1 text-sm  text-gray-900 dark:text-white font-bold"
         >
           {labelText}
         </label>

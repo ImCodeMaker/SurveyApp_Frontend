@@ -1,6 +1,8 @@
 import userModel from "@/models/userModel";
+import LogoutModel from "@/models/logoutModel";
+import { SessionStorageSetItem } from "@/services/storageservices";
 
-const userLogin = async (
+export const userLogin = async (
   email: string,
   password_Hash: string
 ): Promise<userModel> => {
@@ -25,10 +27,16 @@ const userLogin = async (
 
     const serverResults: userModel = await response.json();
 
+    if (serverResults.id >= 1)
+      SessionStorageSetItem("UserId", String(serverResults.id));
+
+    if (serverResults.isAdmin == true)
+      SessionStorageSetItem("isAdmin", String(serverResults.isAdmin));
+
     return serverResults;
   } catch (error) {
     throw error;
   }
 };
 
-export default userLogin
+

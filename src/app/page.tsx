@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import InputFields from "@/components/inputfields";
 import Button from "@/components/buttons";
-import loginUser from "@/services/userAuthentication";
+import {loginUser} from "@/services/userAuthentication";
 import { useRouter } from 'next/navigation'
+import { SessionStorageGetItems } from "@/services/storageservices";
 
 function Page() {
   const [formData, setFormData] = useState({
@@ -22,6 +23,12 @@ function Page() {
     }));
   };
 
+  const checkAdminStatus = (): void => {
+    const adminValue = SessionStorageGetItems('isAdmin');
+    
+
+    router.push(adminValue === 'true' ? '/admin' : '/main');
+  }
   
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -45,13 +52,19 @@ function Page() {
         password: "",
       });
 
+
+      checkAdminStatus()
+
       // Redirect or handle successful login here
     } catch (error) {
       setError(error instanceof Error ? error.message : "Login failed");
+      
     } finally {
       setLoading(false);
     }
   };
+
+  
 
   return (
     <div className="h-[100dvh] w-[100dvw] bg-gray-100 flex justify-center items-center">
@@ -86,10 +99,10 @@ function Page() {
               labelText="Password"
             />
             <div className="flex justify-center items-center mt-4">
-              <Button name={loading ? "Processing..." : "Login"} type="submit"/>
+              <Button name={loading ? "Processing..." : "Login"}  type="submit"/>
             </div>
             <div className="flex justify-center items-center mt-2">
-              <Button name={'Sign up'} type="submit" func={() => router.push('/signup')}/>
+              <Button  name={'Sign up'} type="submit" func={() => router.push('/signup')}/>
             </div>
           </form>
         </div>
