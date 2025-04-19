@@ -1,18 +1,17 @@
 // userAuthentication.ts
-import { SessionStorageDeleteItems } from "@/services/storageservices";
+import { SessionStorageDeleteItem } from "@/services/storageservices";
 
 export const userLogout = async (userId: number): Promise<boolean> => {
   try {
-    const userID = userId.toString()
-
+    // Exact same request as Swagger
     const response = await fetch(
-      "http://localhost:5056/api/UserActions/logout",
+      `http://localhost:5056/api/UserActions/logout/${userId}`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          accept: "*/*", // This is what Swagger sends
         },
-        body:  userId.toString(),
+        // No body, no content-type
       }
     );
 
@@ -20,13 +19,17 @@ export const userLogout = async (userId: number): Promise<boolean> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Clear session storage
-    SessionStorageDeleteItems("UserId");
-    SessionStorageDeleteItems("isAdmin");
+    
+    if (response.ok) {
+      SessionStorageDeleteItem("UserId");
+      SessionStorageDeleteItem("isAdmin");
+    }
+
+    console.log(userId);
 
     return true;
   } catch (error) {
     console.error("Logout failed:", error);
-    throw new Error("There was an error setting the log-out.");
+    throw error;
   }
 };

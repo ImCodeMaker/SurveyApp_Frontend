@@ -12,11 +12,12 @@ export const fetchSurveys = async (): Promise<SurveyModel[]> => {
 };
 
 
+// surveysServices.ts
 export const fetchSurveyById = async (id: number): Promise<SurveyDetails> => {
   try {
     const response = await fetch(`http://localhost:5056/survey/${id}`);
     if (!response.ok) {
-      const errorDetails = await response.text(); // Get error details from the response
+      const errorDetails = await response.text();
       throw new Error(`Failed to fetch survey: ${errorDetails}`);
     }
     return await response.json();
@@ -25,4 +26,3 @@ export const fetchSurveyById = async (id: number): Promise<SurveyDetails> => {
     throw new Error('Failed to fetch survey');
   }
 };
-

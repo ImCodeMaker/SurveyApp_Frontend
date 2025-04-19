@@ -4,7 +4,7 @@ import InputFields from "@/components/inputfields";
 import Button from "@/components/buttons";
 import {loginUser} from "@/services/userAuthentication";
 import { useRouter } from 'next/navigation'
-import { SessionStorageGetItems } from "@/services/storageservices";
+import { SessionStorageGetItem } from "@/services/storageservices";
 
 function Page() {
   const [formData, setFormData] = useState({
@@ -24,10 +24,10 @@ function Page() {
   };
 
   const checkAdminStatus = (): void => {
-    const adminValue = SessionStorageGetItems('isAdmin');
+    const adminValue = SessionStorageGetItem('isAdmin');
     
 
-    router.push(adminValue === 'true' ? '/admin' : '/main');
+    router.push(adminValue === 'true' ? '/admin' : '/surveys');
   }
   
 
@@ -102,7 +102,7 @@ function Page() {
               <Button name={loading ? "Processing..." : "Login"}  type="submit"/>
             </div>
             <div className="flex justify-center items-center mt-2">
-              <Button  name={'Sign up'} type="submit" func={() => router.push('/signup')}/>
+              <Button  name={'Sign up'} type="button" func={() => router.push('/signup')}/>
             </div>
           </form>
         </div>

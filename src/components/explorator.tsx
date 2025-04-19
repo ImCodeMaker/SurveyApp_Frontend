@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {NavigatorItems} from "@/types/navigationProps";
+import { NavigatorItems } from "@/types/navigationProps";
 import { ChartArea, SquarePen, BookOpenText, User, CopyX } from "lucide-react";
 import NavigatorItemsComponent from "./navigationItems";
 
@@ -17,13 +17,13 @@ function Explorator({ onItemClick }: { onItemClick: (itemName: string) => void }
   }, []);
 
   return (
-    <div className="w-60 bg-white ml-6 drop-shadow-lg rounded-md flex flex-col items-center py-4">
+    <div className="w-[300px] h-[400px] bg-white ml-6 drop-shadow-lg rounded-md flex flex-col items-center py-4">
       <h1 className="text-xl font-semibold mb-4">Navigation</h1>
       <div className="w-full flex-1 overflow-y-auto">
         {navItems?.map((nav) => (
-          <NavigatorItemsComponent 
+          <NavigatorItemsComponent
             key={nav.name}
-            image={nav.image} 
+            image={nav.image}
             name={nav.name}
             onClick={() => onItemClick(nav.name)}
           />

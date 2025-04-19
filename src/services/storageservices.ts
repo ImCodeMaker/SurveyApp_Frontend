@@ -1,23 +1,18 @@
-export const SessionStorageSetItem = (key: string, value: string) => {
-    if (!key || !value)
-        throw new Error('You must provide a value and a key, to use this service.')
+export const SessionStorageGetItem = (key: string): string | null => {
+    if (typeof window !== 'undefined') {
+        return sessionStorage.getItem(key);
+    }
+    return null;
+};
 
-    const sessionValue = sessionStorage.setItem(key,value)
-    return sessionValue
-}
+export const SessionStorageSetItem = (key: string, value: string): void => {
+    if (typeof window !== 'undefined') {
+        sessionStorage.setItem(key, value);
+    }
+};
 
-export const SessionStorageGetItems = (key: string) => {
-    if (!key)
-        throw new Error('You must provide a value and a key, to use this service.')
-    
-    const findValue = sessionStorage.getItem(key)
-    return findValue
-}
-
-export const SessionStorageDeleteItems = (key: string) => {
-    if (!key)
-        throw new Error('You must provide a value and a key, to use this service.')
-    
-    const findValue = sessionStorage.removeItem(key)
-    return findValue
-}
+export const SessionStorageDeleteItem = (key: string): void => {
+    if (typeof window !== 'undefined') {
+        sessionStorage.removeItem(key);
+    }
+};

@@ -33,6 +33,7 @@ export interface SurveyOption {
     updated_At?: string; 
     startDate?: string; 
     endDate?: string;
+    dueDate: string;
     questions: SurveyQuestion[];
     answers: SurveyAnswer[] | null;
   }

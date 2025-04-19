@@ -41,8 +41,7 @@ function SignUp() {
       setLoading(true);
       const response = await signupUser(formData.email, formData.password,formData.name,formData.lastname);
       console.log(response);
-
-     
+      
       setFormData({
         email: "",
         password: "",
@@ -50,6 +49,7 @@ function SignUp() {
         lastname: ""
       });
 
+      router.push('/surveys')
       
     } catch (error) {
       setError(error instanceof Error ? error.message : "Login failed");

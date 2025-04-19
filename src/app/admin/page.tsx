@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { SessionStorageGetItems } from "@/services/storageservices";
+import { SessionStorageGetItem } from "@/services/storageservices";
 import Explorator from "@/components/explorator";
 import DashboardView from "@/components/views/DashboardView";
 import CreateSurveys from "@/components/views/CreateSurveys";
@@ -15,7 +15,7 @@ function Page() {
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [activeContent, setActiveContent] = useState("Dashboard");
   const router = useRouter();
-  const userId = Number(SessionStorageGetItems("UserId"));
+  const userId = Number(SessionStorageGetItem("UserId"));
 
   const handleNavClick = (itemName: string) => {
     setActiveContent(itemName);
@@ -23,7 +23,7 @@ function Page() {
 
   const isAuthorized = () => {
     try {
-      const adminValue = SessionStorageGetItems("isAdmin");
+      const adminValue = SessionStorageGetItem("isAdmin");
       setIsAdmin(adminValue === "true"); // More precise check
       setIsLoading(false);
     } catch (error) {
@@ -59,6 +59,7 @@ function Page() {
       setIsAdmin(false);
       router.push("/");
       router.refresh();
+
     } catch (error) {
       console.error("Logout failed:", error);
       alert("Failed to logout. Please try again.");
@@ -96,7 +97,7 @@ function Page() {
                 {renderContent()}
                 <div className="absolute bottom-3 right-3">
                   <button
-                    onClick={() => logoutHandler(1)}
+                    onClick={() => logoutHandler(Number(SessionStorageGetItem('UserId')))}
                     className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
                   >
                     Logout
