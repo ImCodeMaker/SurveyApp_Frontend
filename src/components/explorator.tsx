@@ -12,7 +12,6 @@ function Explorator({ onItemClick }: { onItemClick: (itemName: string) => void }
       { image: SquarePen, name: "Create Surveys" },
       { image: BookOpenText, name: "Update Surveys" },
       { image: CopyX, name: "Delete Surveys" },
-      { image: User, name: "Users CRUD" },
     ]);
   }, []);
 

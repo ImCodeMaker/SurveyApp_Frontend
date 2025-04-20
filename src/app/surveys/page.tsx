@@ -12,7 +12,8 @@ import {
   CheckCircle,
   Clock,
   Check,
-  LogOut
+  LogOut,
+  FileText
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -168,10 +169,17 @@ function SurveysDashboard() {
                   </div>
                 )}
                 {hasAnswered && (
-                  <div className="border-t border-green-100 px-5 py-3 bg-green-50 flex justify-end">
+                  <div className="border-t border-green-100 px-5 py-3 bg-green-50 flex justify-between items-center">
                     <span className="text-sm text-green-600 font-medium">
                       Completed ✓
                     </span>
+                    <button 
+                      className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      onClick={() => router.push(`/surveys/getanswers/${survey.id}`)}
+                    >
+                      <FileText size={16} />
+                      Ver Respuestas
+                    </button>
                   </div>
                 )}
               </div>

@@ -5,6 +5,6 @@ export default interface InputsProps{
     placeholder: string,
     type: string,
     value: string,
-    onChange: ChangeEventHandler<HTMLInputElement> 
+    onChange?: ChangeEventHandler<HTMLInputElement> 
     labelText: string
 }

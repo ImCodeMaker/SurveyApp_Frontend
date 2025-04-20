@@ -8,11 +8,11 @@ import UpdateSurveys from "@/components/views/UpdateSurveys";
 import DeleteSurveys from "@/components/views/DeleteSurveys";
 import UsersCRUD from "@/components/views/UsersCRUD";
 import { Logout } from "@/services/userAuthentication";
-import { useRouter } from "next/navigation"; // Changed from next/router to next/navigation
+import { useRouter } from "next/navigation";
 
 function Page() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Added loading state
+  const [isLoading, setIsLoading] = useState(true); 
   const [activeContent, setActiveContent] = useState("Dashboard");
   const router = useRouter();
   const userId = Number(SessionStorageGetItem("UserId"));
@@ -24,7 +24,7 @@ function Page() {
   const isAuthorized = () => {
     try {
       const adminValue = SessionStorageGetItem("isAdmin");
-      setIsAdmin(adminValue === "true"); // More precise check
+      setIsAdmin(adminValue === "true"); 
       setIsLoading(false);
     } catch (error) {
       console.error("Authorization check failed:", error);

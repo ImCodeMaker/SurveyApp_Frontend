@@ -26,3 +26,7 @@ export const fetchSurveyById = async (id: number): Promise<SurveyDetails> => {
     throw new Error('Failed to fetch survey');
   }
 };
+
+export const deleteSurvey = (surveyId: number) => {
+  
+}
