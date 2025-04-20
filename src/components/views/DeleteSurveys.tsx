@@ -23,10 +23,6 @@ function DeleteSurveys() {
     try {
       const response = await fetch(`http://localhost:5056/api/Surveys/${id}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem('token')}` // If using authentication
-        }
       });
 
       if (!response.ok) {
